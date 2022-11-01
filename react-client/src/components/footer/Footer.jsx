@@ -44,7 +44,16 @@ const Footer = () => {
           <li className="fListItem">Terms & conditions</li>
         </ul>
       </div>
-      <div className="fText">Copyright © 2022 Booking.</div>
+      <div className="fText">
+        Copyright © 2022{" "}
+        <a
+          href="https://sulymanayomi.github.io/Ayomi/"
+          style={{ textDecoration: "none" }}
+        >
+          Sulymanayomi
+        </a>
+        .
+      </div>
     </div>
   );
 };

@@ -23,6 +23,15 @@ const List = () => {
   const handleClick = () => {
     refetch();
   };
+  if (!dates) {
+    setDates([
+      {
+        startDate: new Date(),
+        endDate: new Date(),
+        key: "selection",
+      },
+    ]);
+  }
 
   return (
     <div>

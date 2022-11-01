@@ -12,6 +12,8 @@
   margin: 20px 0px 100px 0px;
 }
 
+
+
 .headerContainer.listMode {
   margin: 20px 0px 0px 0px;
 }
@@ -53,12 +55,12 @@
   border: 3px solid #febb02;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   padding: 10px 0px;
   border-radius: 5px;
   position: absolute;
   bottom: -25px;
-  width: 100%;
+  width: calc(100% - 20px);
   max-width: 1024px;
 }
 
@@ -125,4 +127,82 @@
 
 .optionCounterButton:disabled {
   cursor: not-allowed;
+}
+
+@media (max-width: 576.98px) {
+  .header {
+    padding-left: 5px;
+  }
+
+  .headerContainer {
+    margin: 20px 0px 60px 0px;
+  }
+
+  .headerList {
+    margin-bottom: 25px;
+    gap: 10px;
+    font-size: 10px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  .headerDesc {
+    margin: 10px 0px;
+  }
+
+  .headerSearch {
+    height: 11px;
+    font-size: 6px;
+    padding-left: 5px;
+    bottom: -20px;
+  }
+
+  .headerSearchInput {
+    font-size: 8px;
+  }
+
+  .headerBtn {
+    font-size: 10px;
+  }
+
+  .options {
+    top: 34px;
+  }
+
+  .optionItem {
+    width: 130px;
+  }
+
+  .optionCounter {
+    font-size: 8px;
+  }
+
+  .optionCounterButton {
+    width: 20px;
+    height: 20px;
+  }
+
+  .date {
+    top: 34px;
+    font-size: 6px !important;
+
+  }
+
+  .rdrCalendarWrapper {
+    font-size: 6px !important;
+  }
+
+  .rdrDateDisplayItem>input {
+    font-size: 8px;
+  }
+
+  .rdrMonthAndYearPickers select {
+    font-size: 7px;
+  }
+
+  .rdrNextPrevButton {
+    font-size: 6px;
+  }
 }

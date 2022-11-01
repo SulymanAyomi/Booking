@@ -16,6 +16,7 @@ import useFetch from "../../hooks/useFetch";
 import { SearchContext } from "../../context/SearchContext";
 import { AuthContext } from "../../context/AuthContext";
 import Reserve from "../../components/reserve/Reserve";
+import { useEffect } from "react";
 
 const Hotel = () => {
   const location = useLocation();
@@ -28,14 +29,15 @@ const Hotel = () => {
   const { dates, options } = useContext(SearchContext);
   const { user } = useContext(AuthContext);
 
+  console.log(dates);
   const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
   function dayDifference(date1, date2) {
-    const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+    const timeDiff = Math.abs(date2?.getTime() - date1?.getTime());
     const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
     return diffDays;
   }
+  const days = dayDifference(dates[0]?.endDate, dates[0]?.startDate);
 
-  const days = dayDifference(dates[0].endDate, dates[0].startDate);
   const handleOpen = (i) => {
     setSlideNumber(i);
     setOpen(true);
@@ -57,7 +59,9 @@ const Hotel = () => {
       ) : (
         <div className="hotelContainer">
           <div className="hotelWrapper">
-            <button className="bookNow">Reserve or Book Now!</button>
+            <button className="bookNow" onClick={handleClick}>
+              Reserve or Book Now!
+            </button>
             <h1 className="hotelTitle">{data.name}</h1>
             <div className="hotelAddress">
               <FontAwesomeIcon icon={faLocationDot} />
@@ -90,7 +94,7 @@ const Hotel = () => {
               <div className="hotelDetailsPrice">
                 <h1>Perfect for a {days}-night stay!</h1>
                 <span>
-                  Located in the real heart of Krakow, this property has an
+                  Located in the real heart of City, this property has an
                   excellent location score of 9.8!
                 </span>
                 <h2>

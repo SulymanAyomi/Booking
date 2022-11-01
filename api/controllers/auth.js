@@ -6,6 +6,14 @@ import jwt from "jsonwebtoken";
 export const register = async (req, res, next) => {
   try {
     const salt = bcrypt.genSaltSync(10);
+    const user = await User.findOne({ username: req.body.username });
+    const user1 = await User.findOne({ username: req.body.email });
+    if (user) {
+      return next(createError(400, "Username already taken"));
+    }
+    if (user1) {
+      return next(createError(400, "email already taken"));
+    }
     const hash = bcrypt.hashSync(req.body.password, salt);
     const newUser = new User({
       ...req.body,

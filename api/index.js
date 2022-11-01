@@ -10,10 +10,20 @@ import userRoute from "./routes/users.js";
 import roomsRoute from "./routes/rooms.js";
 import hotelsRoute from "./routes/hotel.js";
 import usersRoute from "./routes/users.js";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+// create a write stream (in append mode)
+var accessLogStream = fs.createWriteStream(path.join(__dirname, "access.log"), {
+  flags: "a",
+});
 
 // configurations
 const app = express();
-app.use(morgan("dev"));
+// setup the logger
+app.use(morgan("combined", { stream: accessLogStream }));
 app.set("trust proxy", "loopback");
 app.use(cors());
 app.use(cookieParser());
