@@ -11,12 +11,11 @@ import {
   faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
 import { useContext, useState } from "react";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import { SearchContext } from "../../context/SearchContext";
 import { AuthContext } from "../../context/AuthContext";
 import Reserve from "../../components/reserve/Reserve";
-import { useEffect } from "react";
 
 const Hotel = () => {
   const location = useLocation();
@@ -25,23 +24,40 @@ const Hotel = () => {
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  const { data, loading, error, refetch } = useFetch(`/hotels/find/${id}`);
+  const { data, loading } = useFetch(`/hotels/find/${id}`);
   const { dates, options } = useContext(SearchContext);
   const { user } = useContext(AuthContext);
 
   console.log(dates);
+  if (dates.length === 0) {
+    navigate("/");
+  }
   const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
   function dayDifference(date1, date2) {
     const timeDiff = Math.abs(date2?.getTime() - date1?.getTime());
     const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
     return diffDays;
   }
-  const days = dayDifference(dates[0]?.endDate, dates[0]?.startDate);
+  const day = dayDifference(dates[0]?.endDate, dates[0]?.startDate);
+  const days = day === 0 ? 1 : day;
 
   const handleOpen = (i) => {
     setSlideNumber(i);
     setOpen(true);
   };
+
+  const handleMove = (direction) => {
+    let newSlideNumber;
+
+    if (direction === "l") {
+      newSlideNumber = slideNumber === 0 ? 5 : slideNumber - 1;
+    } else {
+      newSlideNumber = slideNumber === 5 ? 0 : slideNumber + 1;
+    }
+
+    setSlideNumber(newSlideNumber);
+  };
+
   const handleClick = () => {
     if (user) {
       setOpenModal(true);
@@ -58,6 +74,32 @@ const Hotel = () => {
         "loading"
       ) : (
         <div className="hotelContainer">
+          {open && (
+            <div className="slider">
+              <FontAwesomeIcon
+                icon={faCircleXmark}
+                className="close"
+                onClick={() => setOpen(false)}
+              />
+              <FontAwesomeIcon
+                icon={faCircleArrowLeft}
+                className="arrow"
+                onClick={() => handleMove("l")}
+              />
+              <div className="sliderWrapper">
+                <img
+                  src={data.photos[slideNumber]}
+                  alt=""
+                  className="sliderImg"
+                />
+              </div>
+              <FontAwesomeIcon
+                icon={faCircleArrowRight}
+                className="arrow"
+                onClick={() => handleMove("r")}
+              />
+            </div>
+          )}
           <div className="hotelWrapper">
             <button className="bookNow" onClick={handleClick}>
               Reserve or Book Now!

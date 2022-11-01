@@ -119,6 +119,7 @@
   .siImg {
     height: 100px;
     object-fit: cover;
+    width: 100%;
   }
 
   .siTitle {

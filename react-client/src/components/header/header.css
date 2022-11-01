@@ -141,7 +141,12 @@
   .headerList {
     margin-bottom: 25px;
     gap: 10px;
-    font-size: 10px;
+    font-size: 7px;
+  }
+
+  .headerListItem.active {
+    padding: 5px;
+    ;
   }
 
   h1 {

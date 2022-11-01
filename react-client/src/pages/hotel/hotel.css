@@ -196,4 +196,37 @@
   .hotelImg {
     height: 80px;
   }
+
+  .arrow {
+    margin: 11px;
+    font-size: 20px;
+  }
+
+  .sliderImg {
+    width: 290px;
+    height: fit-content;
+    object-fit: cover;
+  }
+
+  .slider {
+    width: 100vw;
+    height: auto;
+  }
+
+  .close {
+    position: absolute;
+    top: 2px;
+    right: 3px;
+    font-size: 20px;
+    color: lightgray;
+    cursor: pointer;
+  }
+
+  .sliderWrapper {
+    display: block;
+    height: auto;
+    width: auto;
+  }
+
+
 }
